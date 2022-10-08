@@ -3,8 +3,11 @@ let app = express();
 
 const Port = 3000; 
 
-console.log("Hello World");
 
+
+app.get("/", function(req, res){
+    res.send("Hello Express")
+})
 
 
 
