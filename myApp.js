@@ -10,7 +10,10 @@ console.log(absolutePath)
 
 app.get("/", function(req, res){
     res.sendFile(absolutePath)
+
 })
+
+app.use('/public', express.static('public'))
 
 
 
