@@ -51,9 +51,15 @@ app.get('/:word/echo', (req, res) => {
     });    
 });
 
-//gets query string from url and sends as json
+//gets query string from url and sends as json, POST gets form data from req.body and outputs as json. 
 app.route('/name').get((req, res)=> {    
-    const {first, last} = req.query
+    const {first, last} = req.query;
+    res.json({
+        name: `${first} ${last}`
+    })
+})
+.post((req,res) => {
+    const {first,last} = req.body;
     res.json({
         name: `${first} ${last}`
     })
