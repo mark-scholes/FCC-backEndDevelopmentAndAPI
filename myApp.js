@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv').config()
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -18,6 +19,10 @@ app.use((req, res, next) => {
     console.log(string);      
      next();   
 });
+
+//added bodyparser middleware
+app.use(bodyParser.urlencoded({extended: false}))
+
 
 //returns html for home route
 app.get("/", (req, res, ) =>{    
@@ -38,13 +43,21 @@ app.get('/now', (req,res, next) =>{
     res.send({time: req.time})
 });
 
-// gets query string params and echos them back as json  
+// gets params from url and echos them back as json  
 app.get('/:word/echo', (req, res) => {
     const {word} = req.params;
     res.json({
         echo: word
     });    
 });
+
+//gets query string from url and sends as json
+app.route('/name').get((req, res)=> {    
+    const {first, last} = req.query
+    res.json({
+        name: `${first} ${last}`
+    })
+})
 
 
 
