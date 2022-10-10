@@ -8,9 +8,22 @@ let PORT = process.env.PORT || 3000
 const absolutePath = __dirname + '/views/index.html'
 
 
-app.get("/", function(req, res){
-    res.sendFile(absolutePath)
 
+app.use((req, res, next) => {
+
+    let string = `${req.method} ${req.path} - ${req.ip}`
+    console.log(string) 
+      
+     next();
+   
+});
+
+
+
+
+app.get("/", function(req, res, ){
+    
+    res.sendFile(absolutePath)
 })
 
 // added a get request to a hard coded json object
@@ -21,10 +34,11 @@ app.get("/json", function(req, res){
 })
 
 
+
 app.use('/public', express.static('public'))
 
 
-
+ 
 
 
 
