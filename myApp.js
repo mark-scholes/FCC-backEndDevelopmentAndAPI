@@ -7,6 +7,10 @@ let PORT = process.env.PORT || 3000
 
 const absolutePath = __dirname + '/views/index.html'
 
+const getCurrentTime = () => {
+    return new Date().toString()
+}
+
 
 
 app.use((req, res, next) => {
@@ -31,7 +35,15 @@ app.get("/json", function(req, res){
 
     process.env.MESSAGE_STYLE === "uppercase" ? 
     res.json({"message": "Hello json".toUpperCase()}) : res.json({"message": "Hello json"})
-})
+});
+
+app.get('/now', function (req,res, next){
+    req.time = getCurrentTime();
+    next();
+}, function(req, res) {
+    res.send({time: req.time})
+}
+)
 
 
 
